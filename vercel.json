@@ -1,0 +1,20 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/streak-reminder",
+      "schedule": "0 19 * * *"
+    },
+    {
+      "path": "/api/cron/weekly-recap",
+      "schedule": "0 9 * * 1"
+    },
+    {
+      "path": "/api/cron/reengagement",
+      "schedule": "0 17 * * *"
+    },
+    {
+      "path": "/api/cron/purge-import-errors",
+      "schedule": "0 4 * * 1"
+    }
+  ]
+}

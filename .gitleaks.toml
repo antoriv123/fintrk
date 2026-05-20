@@ -1,0 +1,28 @@
+title = "Gitleaks config for Fintrk"
+
+# Inherit the default Gitleaks rules and add project-specific allowlist.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Allowlist for safe placeholders and public values"
+
+# Files that contain explicit placeholders or example values.
+paths = [
+  '''^\.env\.example$''',
+  '''^README\.md$''',
+  '''^SECURITY\.md$''',
+  '''^docs/.*\.md$''',
+  '''^\.github/.*''',
+  '''^.*\.test\.(ts|tsx|js)$''',
+  '''^src/.+/__tests__/.*''',
+]
+
+# Specific public-by-design tokens that may appear in code (none expected,
+# but listed defensively).
+regexes = [
+  # CI placeholders in workflows
+  '''ci-placeholder-[a-z-]+''',
+  # Allow `sk-ci-placeholder` style examples
+  '''sk-ci-placeholder''',
+]

@@ -1,0 +1,617 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-display: var(--font-display);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-income: var(--income);
+  --color-expense: var(--expense);
+  --color-transfer: var(--transfer);
+  --color-warm-accent: var(--warm-accent);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --breakpoint-xs: 480px;
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: #FAFAF7;
+  --foreground: #1A1A1A;
+  --card: #FFFFFF;
+  --card-foreground: #1A1A1A;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A1A1A;
+  --primary: #2D6A4F;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F7F7F5;
+  --secondary-foreground: #2D6A4F;
+  --muted: #F7F7F5;
+  --muted-foreground: #888888;
+  --accent: #E8F5EE;
+  --accent-foreground: #2D6A4F;
+  --destructive: #EF4444;
+  --destructive-foreground: #EF4444;
+  --border: #E9ECEF;
+  --input: #E9ECEF;
+  --ring: #2D6A4F;
+  --chart-1: #2D6A4F;
+  --chart-2: #F4A261;
+  --chart-3: #0EA5E9;
+  --chart-4: #14B8A6;
+  --chart-5: #E76F51;
+  --sidebar: #FAFAF7;
+  --sidebar-foreground: #1A1A1A;
+  --sidebar-primary: #2D6A4F;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #E8F5EE;
+  --sidebar-accent-foreground: #2D6A4F;
+  --sidebar-border: #E9ECEF;
+  --sidebar-ring: #2D6A4F;
+
+  /* Finance semantic colors */
+  --income: #2D6A4F;
+  --expense: #EF4444;
+  --transfer: #6b7280;
+  --invest: #0EA5E9;
+  --warning: #d97706;
+  --warm-accent: #F4A261;
+}
+
+.dark {
+  --background: #1A1A1A;
+  --foreground: #FAFAF7;
+  --card: #242424;
+  --card-foreground: #FAFAF7;
+  --popover: #242424;
+  --popover-foreground: #FAFAF7;
+  --primary: #4ADE80;
+  --primary-foreground: #1A1A1A;
+  --secondary: #2A2A2A;
+  --secondary-foreground: #FAFAF7;
+  --muted: #2A2A2A;
+  --muted-foreground: #B0B0B8;
+  --accent: #2A2A2A;
+  --accent-foreground: #FAFAF7;
+  --destructive: #f87171;
+  --destructive-foreground: #f87171;
+  --border: #3A3A3A;
+  --input: #3A3A3A;
+  --ring: #4ADE80;
+  --chart-1: #4ADE80;
+  --chart-2: #F4A261;
+  --chart-3: #38BDF8;
+  --chart-4: #2DD4BF;
+  --chart-5: #FB923C;
+  --sidebar: #1A1A1A;
+  --sidebar-foreground: #FAFAF7;
+  --sidebar-primary: #4ADE80;
+  --sidebar-primary-foreground: #1A1A1A;
+  --sidebar-accent: #2A2A2A;
+  --sidebar-accent-foreground: #FAFAF7;
+  --sidebar-border: #333333;
+  --sidebar-ring: #4ADE80;
+
+  --income: #4ADE80;
+  --expense: #f87171;
+  --transfer: #9ca3af;
+  --invest: #38BDF8;
+  --warning: #fbbf24;
+  --warm-accent: #F4A261;
+}
+
+html, body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans, system-ui), -apple-system, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100dvh;
+  overscroll-behavior-y: none;
+}
+
+/* Safe area support for notched phones */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Prevent iOS zoom on input focus (font-size < 16px) */
+@media screen and (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Smooth scrolling on mobile */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Font-scale accesibilidad — el control en Settings → Experience cambia
+   el atributo data-font-scale en <html>. Tailwind usa rem, así que
+   multiplicar el root font-size escala toda la UI proporcionalmente. */
+html[data-font-scale="sm"] { font-size: 14.4px; }
+html { font-size: 16px; }
+html[data-font-scale="lg"] { font-size: 18.4px; }
+html[data-font-scale="xl"] { font-size: 20.8px; }
+
+/* ── Sonner toasts: look minimalista glass + accent-left por tipo ──
+   Evitamos `richColors` de Sonner (que pinta el fondo entero de verde/
+   rojo y se ve agresivo). En su lugar: card semi-transparente con
+   backdrop-blur, padding generoso, radius 16, sombra suave y un
+   border-left de 3px de color según el tipo de notificación. */
+
+/* Posición del contenedor: Sonner inyecta <ol data-sonner-toaster> con
+   top = var(--offset). safe-area-inset-top en iPhone con isla ya
+   incluye la altura de la isla (~59pt), así que sólo añadimos un
+   pequeño margen encima. Fallback 72px absolutos para dispositivos
+   donde env() no se resuelve. */
+[data-sonner-toaster][data-y-position="top"] {
+  top: max(72px, calc(env(safe-area-inset-top, 0px) + 16px)) !important;
+}
+[data-sonner-toast] {
+  padding: 13px 16px !important;
+  min-height: 56px;
+  border-radius: 16px !important;
+  background: color-mix(in srgb, var(--color-card) 92%, transparent) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  backdrop-filter: blur(18px) saturate(1.6);
+  border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+  color: var(--color-foreground) !important;
+  font-family: var(--font-sans, system-ui);
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+}
+.dark [data-sonner-toast] {
+  background: color-mix(in srgb, var(--color-card) 90%, transparent) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+[data-sonner-toast][data-type="success"] { border-left: 3px solid var(--color-primary) !important; }
+[data-sonner-toast][data-type="error"]   { border-left: 3px solid #ef4444 !important; }
+[data-sonner-toast][data-type="warning"] { border-left: 3px solid #f59e0b !important; }
+[data-sonner-toast][data-type="info"]    { border-left: 3px solid #0ea5e9 !important; }
+
+[data-sonner-toast] [data-title] {
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  color: var(--color-foreground) !important;
+  letter-spacing: -0.01em;
+}
+[data-sonner-toast] [data-description] {
+  font-size: 12px !important;
+  color: var(--color-muted-foreground) !important;
+  margin-top: 2px !important;
+  font-weight: 400 !important;
+}
+[data-sonner-toast] [data-icon] {
+  width: 18px !important;
+  height: 18px !important;
+  margin-right: 10px !important;
+}
+[data-sonner-toast][data-type="success"] [data-icon] { color: var(--color-primary) !important; }
+[data-sonner-toast][data-type="error"]   [data-icon] { color: #ef4444 !important; }
+[data-sonner-toast][data-type="warning"] [data-icon] { color: #f59e0b !important; }
+
+/* Premium celebration toast — used by PremiumProvider for micro hero moments
+ * (aiTouchSaved, onboardingWelcome, importSuccess, monthInsight). Soft green
+ * gradient border + glow; still readable against any bg. */
+.fintrk-premium-toast {
+  border-left: 3px solid transparent !important;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--color-card) 92%, transparent), color-mix(in srgb, var(--color-card) 92%, transparent)),
+    linear-gradient(180deg, #84CC16 0%, #2D6A4F 100%) !important;
+  background-origin: border-box !important;
+  background-clip: padding-box, border-box !important;
+  box-shadow: 0 10px 30px rgba(45, 106, 79, 0.18), 0 0 0 1px rgba(132, 204, 22, 0.15) !important;
+}
+.fintrk-premium-toast [data-icon] { color: #2D6A4F !important; }
+
+@keyframes streak-glow-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.92); }
+  50% { opacity: 0.7; transform: scale(1.08); }
+}
+[data-sonner-toast][data-type="info"]    [data-icon] { color: #0ea5e9 !important; }
+
+[data-sonner-toast] [data-close-button] {
+  background: transparent !important;
+  border: none !important;
+  color: var(--color-muted-foreground) !important;
+  opacity: 0.6;
+}
+[data-sonner-toast] [data-close-button]:hover { opacity: 1; }
+
+/* Hide scrollbars for horizontal scroll containers */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Snap scrolling for card carousels */
+.snap-x {
+  scroll-snap-type: x mandatory;
+}
+.snap-start {
+  scroll-snap-align: start;
+}
+
+/* Finance color utilities */
+.text-income { color: var(--income); }
+.text-expense { color: var(--expense); }
+.text-transfer { color: var(--transfer); }
+.text-invest { color: var(--invest); }
+.bg-income { background-color: var(--income); }
+.bg-expense { background-color: var(--expense); }
+
+/* Fade-in animation for loaded content */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-in {
+  animation: fade-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Staggered children animation */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-stagger > * {
+  animation: slide-up 0.35s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+.animate-stagger > *:nth-child(1) { animation-delay: 0ms; }
+.animate-stagger > *:nth-child(2) { animation-delay: 50ms; }
+.animate-stagger > *:nth-child(3) { animation-delay: 100ms; }
+.animate-stagger > *:nth-child(4) { animation-delay: 150ms; }
+.animate-stagger > *:nth-child(5) { animation-delay: 200ms; }
+.animate-stagger > *:nth-child(6) { animation-delay: 250ms; }
+.animate-stagger > *:nth-child(7) { animation-delay: 300ms; }
+.animate-stagger > *:nth-child(8) { animation-delay: 350ms; }
+
+/* Scale in for cards */
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-scale-in {
+  animation: scale-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Number count animation */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-count {
+  animation: count-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards;
+}
+
+/* Pulse for loading states */
+@keyframes gentle-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+.animate-gentle-pulse {
+  animation: gentle-pulse 1.5s ease-in-out infinite;
+}
+
+/* Press effect for interactive cards */
+.press-effect {
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.press-effect:active {
+  transform: scale(0.97);
+}
+
+/* Slide transitions for wizard steps */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Shimmer wave para skeletons premium. La pseudo :before de Skeleton se
+   desplaza de -100% a 100% dejando un brillo suave que recorre el placeholder. */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-slot="skeleton"]::before { animation: none !important; }
+}
+
+/* ── Page slide: transición direccional entre tabs y entre meses ──
+   Antes usábamos slide-in-from-right-6 (~24px) + duration-500, pero el
+   movimiento era tan corto que en un iPhone real se percibía como un
+   simple fade. Ahora: 80px de desplazamiento, 700ms, easing out-quint
+   (tipo iOS). translate3d fuerza GPU compositing; will-change reserva
+   la capa para evitar jank en mobile. */
+@keyframes pageSlideFromRight {
+  0% { transform: translate3d(80px, 0, 0); opacity: 0; }
+  100% { transform: translate3d(0, 0, 0); opacity: 1; }
+}
+@keyframes pageSlideFromLeft {
+  0% { transform: translate3d(-80px, 0, 0); opacity: 0; }
+  100% { transform: translate3d(0, 0, 0); opacity: 1; }
+}
+.page-slide-forward {
+  animation: pageSlideFromRight 0.7s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  will-change: transform, opacity;
+}
+.page-slide-back {
+  animation: pageSlideFromLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  will-change: transform, opacity;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-slide-forward, .page-slide-back { animation: none !important; }
+}
+
+/* Durante la animación el contenido puede sobresalir horizontalmente
+   unos píxeles; el main del AppShell ya aplica overflow-x hidden via
+   clase, pero por si acaso lo fijamos en el body a nivel raíz. */
+body { overflow-x: hidden; }
+
+/* ── Drawer lateral (MoreMenu): slide completo + bordes difuminados ──
+   Entra desde 100% de su ancho (fuera de pantalla) con 400ms y
+   out-quint. Los extremos superior e inferior se desvanecen con un
+   mask-image para que no se vea un rectángulo duro cortado. */
+@keyframes drawerSlideIn {
+  0% { transform: translate3d(100%, 0, 0); opacity: 0.9; }
+  100% { transform: translate3d(0, 0, 0); opacity: 1; }
+}
+.drawer-slide-in {
+  animation: drawerSlideIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.drawer-soft-edges {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    black 28px,
+    black calc(100% - 28px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    black 28px,
+    black calc(100% - 28px),
+    transparent 100%
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .drawer-slide-in { animation: none !important; }
+}
+
+/* ── Nav icons: animación ONE-SHOT en el momento de activarse ──
+   El key del wrapper cambia al volverse activo, así que React remonta el
+   nodo y la animación se ejecuta una sola vez. No hay infinite: la tab
+   queda estable en verde sin moverse una vez activa.
+
+   transform-box: fill-box hace que el transform-origin de cada path/rect
+   sea relativo a su propio bounding box — imprescindible para animar
+   piezas individuales de un SVG sin que todo el icono se descuadre. */
+.nav-icon-wrapper svg [class*="nav-piece"],
+.nav-icon-wrapper svg path,
+.nav-icon-wrapper svg rect {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* ── Transacciones: ArrowUpDown ──
+   El orden de paths en lucide ArrowUpDown es:
+     1. "m21 16-4 4-4-4" → flecha apuntando ABAJO (derecha)
+     2. "M17 20V4"       → línea vertical derecha
+     3. "m3 8 4-4 4 4"   → flecha apuntando ARRIBA (izquierda)
+     4. "M7 4v16"        → línea vertical izquierda
+   La flecha que apunta arriba entra cayendo desde arriba; la que apunta
+   abajo entra subiendo desde abajo. Las líneas hacen un fade discreto. */
+
+@keyframes nav-arrow-from-top {
+  0% { transform: translateY(-10px); opacity: 0; }
+  60% { transform: translateY(1px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+@keyframes nav-arrow-from-bottom {
+  0% { transform: translateY(10px); opacity: 0; }
+  60% { transform: translateY(-1px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+@keyframes nav-line-fade-in {
+  0% { opacity: 0; transform: scaleY(0.5); }
+  100% { opacity: 1; transform: scaleY(1); }
+}
+
+.nav-icon-wrapper[data-icon-name="ArrowUpDown"][data-active="1"] svg path:nth-child(1) {
+  animation: nav-arrow-from-bottom 0.6s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+}
+.nav-icon-wrapper[data-icon-name="ArrowUpDown"][data-active="1"] svg path:nth-child(2) {
+  animation: nav-line-fade-in 0.5s ease-out 0.05s both;
+}
+.nav-icon-wrapper[data-icon-name="ArrowUpDown"][data-active="1"] svg path:nth-child(3) {
+  animation: nav-arrow-from-top 0.6s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+}
+.nav-icon-wrapper[data-icon-name="ArrowUpDown"][data-active="1"] svg path:nth-child(4) {
+  animation: nav-line-fade-in 0.5s ease-out 0.05s both;
+}
+
+/* ── Dashboard: LayoutDashboard ──
+   Los 4 rects "se recomponen": cada uno entra desde su esquina respectiva.
+   Orden en lucide:
+     1. x=3  y=3  → top-left
+     2. x=14 y=3  → top-right
+     3. x=14 y=12 → bottom-right
+     4. x=3  y=16 → bottom-left */
+
+@keyframes nav-piece-tl {
+  0% { transform: translate(-7px, -7px); opacity: 0; }
+  100% { transform: translate(0, 0); opacity: 1; }
+}
+@keyframes nav-piece-tr {
+  0% { transform: translate(7px, -7px); opacity: 0; }
+  100% { transform: translate(0, 0); opacity: 1; }
+}
+@keyframes nav-piece-br {
+  0% { transform: translate(7px, 7px); opacity: 0; }
+  100% { transform: translate(0, 0); opacity: 1; }
+}
+@keyframes nav-piece-bl {
+  0% { transform: translate(-7px, 7px); opacity: 0; }
+  100% { transform: translate(0, 0); opacity: 1; }
+}
+
+.nav-icon-wrapper[data-icon-name="LayoutDashboard"][data-active="1"] svg rect:nth-of-type(1) {
+  animation: nav-piece-tl 0.55s cubic-bezier(0.34, 1.5, 0.64, 1) both;
+}
+.nav-icon-wrapper[data-icon-name="LayoutDashboard"][data-active="1"] svg rect:nth-of-type(2) {
+  animation: nav-piece-tr 0.55s cubic-bezier(0.34, 1.5, 0.64, 1) 0.05s both;
+}
+.nav-icon-wrapper[data-icon-name="LayoutDashboard"][data-active="1"] svg rect:nth-of-type(3) {
+  animation: nav-piece-br 0.55s cubic-bezier(0.34, 1.5, 0.64, 1) 0.1s both;
+}
+.nav-icon-wrapper[data-icon-name="LayoutDashboard"][data-active="1"] svg rect:nth-of-type(4) {
+  animation: nav-piece-bl 0.55s cubic-bezier(0.34, 1.5, 0.64, 1) 0.15s both;
+}
+
+/* ── Cuentas: Wallet ── pop leve al entrar */
+@keyframes nav-wallet-pop {
+  0% { transform: scale(0.82) rotate(-4deg); opacity: 0.4; }
+  55% { transform: scale(1.1) rotate(3deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+.nav-icon-wrapper[data-icon-name="Wallet"][data-active="1"] svg {
+  animation: nav-wallet-pop 0.55s cubic-bezier(0.34, 1.5, 0.64, 1);
+}
+
+/* ── Menu (MoreMenu): líneas que se recomponen ──
+   El icono Menu de lucide tiene 3 paths horizontales. Cuando se activa,
+   cada línea entra desde un lateral diferente (top → desde izquierda,
+   middle → desde derecha, bottom → desde izquierda) con stagger. Crea
+   sensación de "se está abriendo el menú" en lugar de cambiar el color
+   a verde sin más. */
+@keyframes nav-menu-line-from-left {
+  0% { transform: translateX(-8px); opacity: 0; }
+  60% { transform: translateX(0.5px); opacity: 1; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+@keyframes nav-menu-line-from-right {
+  0% { transform: translateX(8px); opacity: 0; }
+  60% { transform: translateX(-0.5px); opacity: 1; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+.nav-icon-wrapper[data-icon-name="Menu"][data-active="1"] svg path:nth-child(1),
+.nav-icon-wrapper[data-icon-name="Menu"][data-active="1"] svg line:nth-of-type(1) {
+  animation: nav-menu-line-from-left 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+}
+.nav-icon-wrapper[data-icon-name="Menu"][data-active="1"] svg path:nth-child(2),
+.nav-icon-wrapper[data-icon-name="Menu"][data-active="1"] svg line:nth-of-type(2) {
+  animation: nav-menu-line-from-right 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) 0.05s both;
+}
+.nav-icon-wrapper[data-icon-name="Menu"][data-active="1"] svg path:nth-child(3),
+.nav-icon-wrapper[data-icon-name="Menu"][data-active="1"] svg line:nth-of-type(3) {
+  animation: nav-menu-line-from-left 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) 0.1s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-icon-wrapper svg,
+  .nav-icon-wrapper svg path,
+  .nav-icon-wrapper svg rect,
+  .nav-icon-wrapper svg line {
+    animation: none !important;
+  }
+}
+
+/* ── Streak flame animations ── */
+@keyframes flame-flicker {
+  0%, 100% { transform: scale(1) translateY(0); filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.45)); }
+  25% { transform: scale(1.04) translateY(-0.5px); filter: drop-shadow(0 0 10px rgba(247, 147, 30, 0.55)); }
+  50% { transform: scale(0.98) translateY(0.5px); filter: drop-shadow(0 0 7px rgba(255, 107, 53, 0.4)); }
+  75% { transform: scale(1.03) translateY(-0.3px); filter: drop-shadow(0 0 11px rgba(255, 210, 63, 0.5)); }
+}
+
+@keyframes flame-flicker-intense {
+  0%, 100% { transform: scale(1) translateY(0) rotate(0deg); filter: drop-shadow(0 0 10px rgba(255, 77, 0, 0.7)); }
+  30% { transform: scale(1.06) translateY(-1px) rotate(-0.5deg); filter: drop-shadow(0 0 14px rgba(255, 140, 0, 0.7)); }
+  60% { transform: scale(0.96) translateY(0.5px) rotate(0.5deg); filter: drop-shadow(0 0 9px rgba(255, 77, 0, 0.6)); }
+}
+
+@keyframes flame-spark {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.3); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--spark-x, 4px), var(--spark-y, -14px)) scale(0); }
+}
+
+@keyframes flame-glow-ring {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.12); }
+}
+
+@keyframes check-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+.streak-flame-lit { animation: flame-flicker 1.6s ease-in-out infinite; }
+.streak-flame-intense { animation: flame-flicker-intense 1.1s ease-in-out infinite; }
+.streak-flame-spark {
+  animation: flame-spark 1.4s ease-out infinite;
+  animation-delay: var(--spark-delay, 0s);
+}
+.streak-flame-ring { animation: flame-glow-ring 2.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .streak-flame-lit, .streak-flame-intense, .streak-flame-spark, .streak-flame-ring {
+    animation: none !important;
+  }
+}

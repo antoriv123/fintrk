@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "waitlistCta": "Join the waitlist"
+  },
+  "hero": {
+    "headline": "Know where your money goes",
+    "headlineAccent": "without typing a thing.",
+    "subtitle": "Upload your statement or snap a receipt. AI categorises everything.",
+    "emailPlaceholder": "you@email.com",
+    "joinWaitlist": "Get early access",
+    "sending": "Sending...",
+    "success": "You're on the list! We'll notify you soon.",
+    "badgeEncrypted": "Encrypted",
+    "badgeGdpr": "GDPR",
+    "badgeNoFees": "No fees"
+  },
+  "features": {
+    "title": "How does it work?",
+    "scan": "Expense scan",
+    "scanDesc": "Take a photo of your receipt or payment screenshot. AI extracts amount, merchant, and category instantly.",
+    "import": "Statement import",
+    "importDesc": "Upload your bank statement as PDF or CSV. AI parses all your transactions at once.",
+    "insights": "AI Insights",
+    "insightsDesc": "Automatic weekly summaries. Spending predictions. Suggestions to reach your goals.",
+    "forWhomTitle": "Who it's for and who it isn't",
+    "forWhom": "If you want to see where your money goes without connecting your bank and without someone selling you mutual funds or generic advice.",
+    "notForWhom": "If you're looking for a bot that tells you to \"invest in the S&P 500\" every time you open the app, Fintrk isn't for you."
+  },
+  "security": {
+    "title": "Your privacy comes first",
+    "encryption": "Full encryption",
+    "encryptionDesc": "Your data encrypted in transit and at rest (AES-256). Not even we can see your data.",
+    "ai": "AI doesn't learn from you",
+    "aiDesc": "Your photos are analyzed and deleted. AI never trains on your data. Ever.",
+    "gdpr": "GDPR compliant",
+    "gdprDesc": "Real account deletion with one click. We comply with European data protection regulations.",
+    "noBankConnect": "We don't connect to your bank",
+    "noBankConnectDesc": "You upload the statement. We never touch your banking credentials. Ever."
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "q1": "How does the scan work?",
+    "a1": "Take a photo of your receipt or banking app screenshot and AI extracts the data automatically. Just confirm and you're done.",
+    "q2": "Is my data safe?",
+    "a2": "AES-256 encryption at rest and in transit. GDPR compliant. Not even we can see your financial data.",
+    "q3": "How much does it cost?",
+    "a3": "7 days free, then €4.99/month (or €39/year — 34% off). No lock-in.",
+    "q4": "Which banks do you support?",
+    "a4": "Any bank that exports PDF or CSV: Revolut, ING, BBVA, Chase, N26, and many more.",
+    "q5": "Do you connect to my bank?",
+    "a5": "No. You upload the statement whenever you want. We never ask for your banking credentials and never use aggregation services. This is a design choice, not a shortcoming.",
+    "q6": "What if the AI picks the wrong category?",
+    "a6": "Change it with a tap. If you correct the same category twice, the app creates an automatic rule and stops asking.",
+    "q7": "Can I cancel anytime?",
+    "a7": "Yes. No lock-in, no weird clauses. Cancel from iPhone Settings or inside the app."
+  },
+  "footer": {
+    "description": "Track your finances with artificial intelligence.",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "contact": "Contact"
+  }
+}

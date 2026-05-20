@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "waitlistCta": "Únete a la waitlist"
+  },
+  "hero": {
+    "headline": "Sabrás dónde se va tu dinero",
+    "headlineAccent": "sin escribir nada.",
+    "subtitle": "Sube el extracto o haz foto a un ticket. La IA categoriza todo.",
+    "emailPlaceholder": "tu@email.com",
+    "joinWaitlist": "Quiero acceso",
+    "sending": "Enviando...",
+    "success": "¡Estás en la lista! Te avisaremos pronto.",
+    "badgeEncrypted": "Encriptado",
+    "badgeGdpr": "GDPR",
+    "badgeNoFees": "Sin comisiones"
+  },
+  "features": {
+    "title": "¿Cómo funciona?",
+    "scan": "Escaneo de gastos",
+    "scanDesc": "Saca foto a tu ticket o captura de Bizum. La IA extrae monto, comercio y categoría al instante.",
+    "import": "Importación de extractos",
+    "importDesc": "Sube tu extracto bancario en PDF o CSV. La IA analiza todas tus transacciones de golpe.",
+    "insights": "Análisis con IA",
+    "insightsDesc": "Resumen semanal automático. Predicciones de gasto. Sugerencias para llegar a tus metas.",
+    "forWhomTitle": "Para quién es y para quién no",
+    "forWhom": "Si quieres ver dónde se va tu dinero sin conectar el banco y sin que nadie te venda fondos de inversión ni consejos genéricos.",
+    "notForWhom": "Si buscas un bot que te diga \"invierte en el S&P 500\" cada vez que abres la app, Fintrk no es para ti."
+  },
+  "security": {
+    "title": "Tu privacidad es lo primero",
+    "encryption": "Encriptación total",
+    "encryptionDesc": "Tus datos encriptados en tránsito y en reposo (AES-256). Ni nosotros podemos ver tus datos.",
+    "ai": "La IA no aprende de ti",
+    "aiDesc": "Tus fotos se analizan y se borran. La IA no entrena con tus datos. Nunca.",
+    "gdpr": "GDPR compliant",
+    "gdprDesc": "Borrado real de cuenta con un clic. Cumplimos la normativa europea de protección de datos.",
+    "noBankConnect": "No conectamos tu banco",
+    "noBankConnectDesc": "Tú subes el extracto. Nosotros no tocamos tus credenciales bancarias. Nunca."
+  },
+  "faq": {
+    "title": "Preguntas frecuentes",
+    "q1": "¿Cómo funciona el escaneo?",
+    "a1": "Sacas foto al ticket o captura de tu app bancaria y la IA extrae los datos automáticamente. Solo confirmas y listo.",
+    "q2": "¿Mis datos están seguros?",
+    "a2": "Encriptación AES-256 en reposo y en tránsito. GDPR compliant. Ni nosotros podemos ver tus datos financieros.",
+    "q3": "¿Cuánto cuesta?",
+    "a3": "7 días gratis y después 4,99 EUR/mes (o 39 EUR/año — 34% de descuento). Sin permanencia.",
+    "q4": "¿Qué bancos soportáis?",
+    "a4": "Cualquier banco que exporte PDF o CSV: Revolut, ING, BBVA, N26, Santander y muchos más.",
+    "q5": "¿Conectáis con mi banco?",
+    "a5": "No. Tú subes el extracto cuando quieres. Nunca pedimos tus credenciales bancarias ni usamos servicios de agregación. Esto es una decisión de diseño, no un fallo.",
+    "q6": "¿Qué pasa si la IA se equivoca de categoría?",
+    "a6": "La cambias con un tap. Si corriges la misma categoría dos veces, la app crea una regla automática y no vuelve a preguntar.",
+    "q7": "¿Puedo cancelar cuando quiera?",
+    "a7": "Sí. Sin permanencia, sin cláusulas raras. Cancelas desde Ajustes de tu iPhone o desde la app."
+  },
+  "footer": {
+    "description": "Controla tus finanzas con inteligencia artificial.",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "contact": "Contacto"
+  }
+}
