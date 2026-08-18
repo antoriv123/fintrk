@@ -2,12 +2,16 @@ import { SignJWT, jwtVerify } from "jose";
 import { hash, compare } from "bcryptjs";
 import { cookies } from "next/headers";
 import { sql } from "./db";
+import { SITE_URL } from "./site-url";
 
 const jwtSecret = process.env.JWT_SECRET;
 if (!jwtSecret) throw new Error("JWT_SECRET environment variable is required");
 const JWT_SECRET = new TextEncoder().encode(jwtSecret);
 
 const COOKIE_NAME = "ft_session";
+// Secure cookies only when the app is served over https — on plain-http
+// self-hosting (localhost/LAN) Safari drops Secure cookies and login loops.
+const SECURE_COOKIES = SITE_URL.startsWith("https");
 const TOKEN_EXPIRY = "30d";
 const BCRYPT_ROUNDS = 12;
 
@@ -71,7 +75,7 @@ export async function setSessionCookie(token: string): Promise<void> {
   const cookieStore = await cookies();
   cookieStore.set(COOKIE_NAME, token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: SECURE_COOKIES,
     sameSite: "lax",
     path: "/",
     maxAge: 30 * 24 * 60 * 60, // 30 days
@@ -87,7 +91,7 @@ export async function clearSessionCookie(): Promise<void> {
   const cookieStore = await cookies();
   cookieStore.set(COOKIE_NAME, "", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: SECURE_COOKIES,
     sameSite: "strict",
     path: "/",
     maxAge: 0,
