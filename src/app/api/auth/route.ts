@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sql } from "@/lib/db";
 import { getUserId } from "@/lib/get-user-id";
+import { SECURE_COOKIES } from "@/lib/auth";
 import crypto from "crypto";
 
 // Secure PIN hashing with scrypt + random salt
@@ -84,7 +85,7 @@ export async function POST(req: NextRequest) {
       const response = NextResponse.json({ valid: true });
       response.cookies.set("pin_verified", "1", {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: SECURE_COOKIES,
         sameSite: "strict",
         maxAge: 7 * 24 * 60 * 60,
         path: "/",

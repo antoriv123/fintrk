@@ -55,7 +55,7 @@ const PUBLIC_API_ROUTES = [
 ];
 
 // Static assets and Next.js internals
-const SKIP_PATHS = ["/_next", "/favicon.ico", "/sw.js", "/manifest.webmanifest", "/icons", "/icon-", "/apple-touch-icon", "/splash-", "/banks/", "/og-image", "/logo.svg"];
+const SKIP_PATHS = ["/_next", "/favicon.ico", "/sw.js", "/manifest.webmanifest", "/icons", "/icon-", "/apple-touch-icon", "/splash-", "/banks/", "/flags/", "/og-image", "/logo.svg"];
 
 function corsHeaders(origin: string | null): Record<string, string> {
   const headers: Record<string, string> = {};

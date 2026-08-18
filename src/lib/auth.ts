@@ -11,7 +11,7 @@ const JWT_SECRET = new TextEncoder().encode(jwtSecret);
 const COOKIE_NAME = "ft_session";
 // Secure cookies only when the app is served over https — on plain-http
 // self-hosting (localhost/LAN) Safari drops Secure cookies and login loops.
-const SECURE_COOKIES = SITE_URL.startsWith("https");
+export const SECURE_COOKIES = SITE_URL.startsWith("https");
 const TOKEN_EXPIRY = "30d";
 const BCRYPT_ROUNDS = 12;
 
