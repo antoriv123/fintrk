@@ -67,6 +67,10 @@ const nextConfig: NextConfig = {
       headers: securityHeaders,
     },
   ],
+  // El formulario vive en /gate/e. Un redirect aquí emite un 307 real, a
+  // diferencia de un redirect() dentro de la página, que se resuelve solo
+  // después de hidratar en cliente.
+  redirects: async () => [{ source: "/login", destination: "/gate/e", permanent: false }],
 };
 
 export default withSerwist(nextConfig);
