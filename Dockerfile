@@ -4,12 +4,15 @@
 # JavaScript puro, pero glibc evita sorpresas con los binarios que Next trae
 # precompilados.
 
-FROM node:22-bookworm-slim AS deps
+# El lockfile del repo es bun.lock, así que instalamos y construimos con bun;
+# el contenedor final sí corre sobre node, que es lo que espera el servidor
+# standalone de Next.
+FROM oven/bun:1-debian AS deps
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci --no-audit --no-fund
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
 
-FROM node:22-bookworm-slim AS builder
+FROM oven/bun:1-debian AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -37,7 +40,7 @@ ENV JWT_SECRET=placeholder-solo-para-el-build \
     DATABASE_URL=postgres://build:build@127.0.0.1:5432/build \
     NEXT_TELEMETRY_DISABLED=1
 
-RUN npm run build
+RUN bun run build
 
 FROM node:22-bookworm-slim AS runner
 WORKDIR /app
