@@ -36,7 +36,6 @@ export default function LoginPage() {
 
       if (!res.ok) {
         setError(data.error || "Error al iniciar sesión");
-        setLoading(false);
         return;
       }
 
@@ -49,6 +48,10 @@ export default function LoginPage() {
       router.refresh();
     } catch {
       setError("Error de conexión");
+    } finally {
+      // El camino de éxito también tiene que soltar el spinner: si la
+      // navegación no llega a ocurrir, el botón se quedaba en "Entrando…"
+      // para siempre, sin error, y parecía que el login no respondía.
       setLoading(false);
     }
   }

@@ -123,7 +123,10 @@ export async function middleware(request: NextRequest) {
 
   // Allow public routes
   if (PUBLIC_ROUTES.includes(pathname) || PUBLIC_API_ROUTES.includes(pathname)) {
-    if (pathname === "/") {
+    // La landing y el formulario de login no tienen nada que ofrecer a quien
+    // ya tiene sesión: sin esto, volver a /gate/e con la cookie puesta enseña
+    // otra vez el formulario y parece que el login no ha funcionado.
+    if (pathname === "/" || pathname === "/gate/e") {
       // Check auth from cookie or Bearer token
       let token = request.cookies.get(COOKIE_NAME)?.value ?? null;
       if (!token) {
@@ -143,9 +146,11 @@ export async function middleware(request: NextRequest) {
       }
 
       // Native app (Capacitor) → show welcome screen instead of web landing
-      const ua = request.headers.get("user-agent") ?? "";
-      if (ua.includes("Fintrk") || ua.includes("Capacitor")) {
-        return NextResponse.redirect(new URL("/welcome", request.url));
+      if (pathname === "/") {
+        const ua = request.headers.get("user-agent") ?? "";
+        if (ua.includes("Fintrk") || ua.includes("Capacitor")) {
+          return NextResponse.redirect(new URL("/welcome", request.url));
+        }
       }
     }
     const response = NextResponse.next();
