@@ -95,7 +95,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gap={8}
           />
         </Providers>
-        <Analytics />
+        {/* Fuera de Vercel el beacon pide /_vercel/insights/script.js, que el
+            middleware redirige al login: el navegador recibe HTML donde
+            esperaba un script y protesta en consola en cada carga. */}
+        {process.env.VERCEL ? <Analytics /> : null}
       </body>
     </html>
   );
