@@ -57,6 +57,9 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Empaqueta el servidor con solo las dependencias que traza, para que la
+  // imagen de Docker no tenga que llevarse node_modules entero.
+  output: "standalone",
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
   serverExternalPackages: ["pdf-parse", "jsonwebtoken"],

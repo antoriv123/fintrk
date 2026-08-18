@@ -1,0 +1,17 @@
+node_modules
+.next
+.git
+.github
+.claude
+ios
+docs
+images
+data
+test-results
+playwright-report
+*.log
+
+# Nunca dentro de la imagen: los secretos llegan por entorno en ejecución.
+.env
+.env.*
+!.env.example

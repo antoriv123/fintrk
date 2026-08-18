@@ -1,0 +1,41 @@
+# Despliegue self-hosted. Los valores salen del fichero .env de al lado
+# (copia de .env.example), que NO se versiona.
+#
+#   docker compose up -d --build
+#
+# El puerto se publica solo en 127.0.0.1: quien tiene que exponer la app es el
+# proxy de delante (Tailscale serve, nginx…), nunca el contenedor directamente.
+
+services:
+  fintrk:
+    build:
+      context: .
+      args:
+        # Se hornean en el bundle: si cambias NEXT_PUBLIC_APP_URL hay que
+        # reconstruir, no basta con reiniciar.
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:?falta NEXT_PUBLIC_APP_URL en .env}
+        NEXT_PUBLIC_OWNER_NAME: ${NEXT_PUBLIC_OWNER_NAME:-}
+        NEXT_PUBLIC_OWNER_LOCATION: ${NEXT_PUBLIC_OWNER_LOCATION:-}
+        NEXT_PUBLIC_OWNER_EMAIL: ${NEXT_PUBLIC_OWNER_EMAIL:-}
+        NEXT_PUBLIC_SUPPORT_EMAIL: ${NEXT_PUBLIC_SUPPORT_EMAIL:-}
+    image: fintrk:local
+    container_name: fintrk
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "127.0.0.1:3010:3010"
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:3010/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
