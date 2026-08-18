@@ -17,9 +17,21 @@ const FLAG_ASSETS: string[] = [
   "gb", "ie", "it", "mx", "nl", "pe", "pt", "us", "uy",
 ].map((c) => `/flags/${c}.png`);
 
+const manifestEntries = self.__SW_MANIFEST ?? [];
+const manifestUrls = new Set(
+  manifestEntries.map((entry) => (typeof entry === "string" ? entry : entry.url)),
+);
+
 const precacheEntries = [
-  ...(self.__SW_MANIFEST ?? []),
-  ...FLAG_ASSETS.map((url) => ({ url, revision: "v1" } as PrecacheEntry)),
+  ...manifestEntries,
+  // Los flags que viven en /public ya llegan en __SW_MANIFEST con su propia
+  // revisión. Volver a añadirlos con revision "v1" hace que Serwist lance
+  // add-to-cache-list-conflicting-entries al construirse, y con ello falla la
+  // evaluación del service worker entero (sin offline ni push). Añadimos solo
+  // los que el manifest no traiga.
+  ...FLAG_ASSETS.filter((url) => !manifestUrls.has(url)).map(
+    (url) => ({ url, revision: "v1" }) as PrecacheEntry,
+  ),
 ];
 
 const serwist = new Serwist({
