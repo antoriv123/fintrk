@@ -3,6 +3,11 @@ import type { NextConfig } from "next";
 
 const isDev = process.env.NODE_ENV === "development";
 const appOrigin = (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").replace(/\/$/, "");
+// Un despliegue self-hosted puede servirse legítimamente por http (localhost,
+// LAN). Ahí `upgrade-insecure-requests` y HSTS reescriben cada petición a
+// https y el navegador falla con ERR_SSL_PROTOCOL_ERROR, así que ambos siguen
+// al protocolo real de la app en lugar de a NODE_ENV.
+const isHttps = appOrigin.startsWith("https");
 
 const withSerwist = withSerwistInit({
   swSrc: "src/app/sw.ts",
@@ -26,8 +31,30 @@ const csp = [
   "connect-src 'self' https://cdnjs.cloudflare.com",
   "font-src 'self'",
   "manifest-src 'self'",
-  ...(isDev ? [] : ["upgrade-insecure-requests"]),
+  ...(isHttps ? ["upgrade-insecure-requests"] : []),
 ].join("; ");
+
+// HSTS solo tiene sentido (y solo es seguro) sirviendo por https: enviarlo
+// por http deja el host clavado en https durante 2 años en el navegador.
+const securityHeaders = [
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "Referrer-Policy", value: "no-referrer" },
+  { key: "X-DNS-Prefetch-Control", value: "off" },
+  { key: "X-Permitted-Cross-Domain-Policies", value: "none" },
+  { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+  { key: "Origin-Agent-Cluster", value: "?1" },
+  { key: "Access-Control-Allow-Origin", value: appOrigin },
+  { key: "Vary", value: "Origin" },
+  {
+    key: "Permissions-Policy",
+    value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()",
+  },
+  ...(isHttps
+    ? [{ key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" }]
+    : []),
+  { key: "Content-Security-Policy", value: csp },
+];
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
@@ -37,29 +64,7 @@ const nextConfig: NextConfig = {
   headers: async () => [
     {
       source: "/(.*)",
-      headers: [
-        { key: "X-Frame-Options", value: "DENY" },
-        { key: "X-Content-Type-Options", value: "nosniff" },
-        { key: "Referrer-Policy", value: "no-referrer" },
-        { key: "X-DNS-Prefetch-Control", value: "off" },
-        { key: "X-Permitted-Cross-Domain-Policies", value: "none" },
-        { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
-        { key: "Origin-Agent-Cluster", value: "?1" },
-        { key: "Access-Control-Allow-Origin", value: appOrigin },
-        { key: "Vary", value: "Origin" },
-        {
-          key: "Permissions-Policy",
-          value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()",
-        },
-        {
-          key: "Strict-Transport-Security",
-          value: "max-age=63072000; includeSubDomains; preload",
-        },
-        {
-          key: "Content-Security-Policy",
-          value: csp,
-        },
-      ],
+      headers: securityHeaders,
     },
   ],
 };
